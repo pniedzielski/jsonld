@@ -1,0 +1,66 @@
+name:                jsonld
+version:             0.1.0.0
+github:              "pniedzielski/jsonld"
+license:             BSD-3-Clause
+license-file:        [ LICENSE.md ]
+author:              "Patrick M. Niedzielski"
+maintainer:          "Patrick M. Niedzielski <patrick@pniedzielski.net>"
+copyright:           "Copyright © 2024 Patrick M. Niedzielski"
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            RDF
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/pniedzielski/jsonld#readme>
+
+extra-doc-files:
+  - README.md
+  - CHANGELOG.md
+  - LICENSE.md
+
+dependencies:
+  - base >= 4.18 && < 5
+
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+  - -Wprepositive-qualified-module
+language: Haskell2010
+default-extensions:
+  - ImportQualifiedPost
+
+library:
+  source-dirs: src
+
+executables:
+  jsonld-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - jsonld
+
+tests:
+  jsonld-test:
+    main:                Main.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - jsonld
+    - tasty
