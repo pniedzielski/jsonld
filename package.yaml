@@ -23,6 +23,7 @@ extra-doc-files:
 
 dependencies:
   - base >= 4.18 && < 5
+  - rdf4h >= 5.1 && < 6
 
 ghc-options:
   - -Wall
