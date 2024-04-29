@@ -67,7 +67,7 @@ jobs:
           stack --resolver ${{ matrix.resolver }} exec ghc-pkg list || true
 
       - name: Generate coverage report
-        uses: 8c6794b6/hpc-codecov-action@v3
+        uses: 8c6794b6/hpc-codecov-action@v4
         with:
           target: stack:jsonld-test
           out: ./codecov.json
