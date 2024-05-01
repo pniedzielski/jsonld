@@ -41,6 +41,7 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 extra-deps:
+  - mime-0.4.0.2@sha256:208947d9d1a19d08850be67ecb28c6e776db697f3bba05bd9d682e51a59f241f,983
   - rdf4h-5.1.0@sha256:1499a4974529bc2e05d2e3878eaa43b2c3c9eb9f2e49dbc8a8b48e0e69d69c60,6341
 
 # Override default flag values for local packages and extra-deps
