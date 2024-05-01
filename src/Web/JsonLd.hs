@@ -27,6 +27,7 @@ module Web.JsonLd
     ) where
 
 import Codec.MIME.Type qualified as MIME
+import Control.Concurrent.Async (Async)
 import Data.Aeson qualified as Aeson
 import Data.RDF (RDF)
 import Data.RDF.IRI (IRIRef)
@@ -69,7 +70,7 @@ data ProcessingMode = JsonLd10 | JsonLd11
 
 data RdfDirection = I18nDatatype | CompoundLiteral
 
-type LoadDocumentCallback = Maybe LoadDocumentOptions -> IRIRef -> RemoteDocument Aeson.Value
+type LoadDocumentCallback = Maybe LoadDocumentOptions -> IRIRef -> Async (RemoteDocument Aeson.Value)
 
 data LoadDocumentOptions = LoadDocumentOptions
     { loadExtractAllScripts :: Bool
@@ -105,41 +106,41 @@ data RemoteDocument a = RemoteDocument
 defaultContext :: Context
 defaultContext = undefined
 
-compact :: Input -> Record
+compact :: Input -> Async Record
 compact = compactWithContext defaultContext
 
-compactWithContext :: Context -> Input -> Record
+compactWithContext :: Context -> Input -> Async Record
 compactWithContext = compactWithOptions defaultOptions
 
-compactWithOptions :: Options -> Context -> Input -> Record
+compactWithOptions :: Options -> Context -> Input -> Async Record
 compactWithOptions = undefined
 
-expand :: Input -> Record
+expand :: Input -> Async Record
 expand = expandWithContext defaultContext
 
-expandWithContext :: Context -> Input -> Record
+expandWithContext :: Context -> Input -> Async Record
 expandWithContext = expandWithOptions defaultOptions
 
-expandWithOptions :: Options -> Context -> Input -> Record
+expandWithOptions :: Options -> Context -> Input -> Async Record
 expandWithOptions = undefined
 
-flatten :: Input -> Record
+flatten :: Input -> Async Record
 flatten = flattenWithContext defaultContext
 
-flattenWithContext :: Context -> Input -> Record
+flattenWithContext :: Context -> Input -> Async Record
 flattenWithContext = flattenWithOptions defaultOptions
 
-flattenWithOptions :: Options -> Context -> Input -> Record
+flattenWithOptions :: Options -> Context -> Input -> Async Record
 flattenWithOptions = undefined
 
-fromRdf :: RDF a -> [Record]
+fromRdf :: RDF a -> Async [Record]
 fromRdf = fromRdfWithOptions defaultOptions
 
-fromRdfWithOptions :: Options -> RDF a -> [Record]
+fromRdfWithOptions :: Options -> RDF a -> Async [Record]
 fromRdfWithOptions = undefined
 
-toRdf :: Input -> RDF a
+toRdf :: Input -> Async (RDF a)
 toRdf = toRdfWithOptions defaultOptions
 
-toRdfWithOptions :: Options -> Input -> RDF a
+toRdfWithOptions :: Options -> Input -> Async (RDF a)
 toRdfWithOptions = undefined
