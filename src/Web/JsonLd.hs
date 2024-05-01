@@ -29,28 +29,28 @@ module Web.JsonLd
 import Codec.MIME.Type qualified as MIME
 import Data.Aeson qualified as Aeson
 import Data.RDF (RDF)
-import Data.RDF.IRI (IRIRef)
 import Data.Text (Text)
 import Data.Vector (Vector)
+import Text.URI (URI(..))
 
 data Input
     = InputRecord !Record
     | InputArray !(Vector Aeson.Object)
-    | InputIri !IRIRef
+    | InputIri !URI
     | InputDoc !(RemoteDocument Aeson.Value)
 
 type Record = Aeson.Object
 
 data ContextElem
     = ContextRecord !Record
-    | ContextIri !IRIRef
+    | ContextIri !URI
 
 data Context
     = ContextElem !ContextElem
     | ContextArray !(Vector ContextElem)
 
 data Options = Options
-    { base :: Maybe IRIRef
+    { base :: Maybe URI
     , compactArrays :: Bool
     , compactToRelative :: Bool
     , documentLoader :: Maybe LoadDocumentCallback
@@ -69,12 +69,12 @@ data ProcessingMode = JsonLd10 | JsonLd11
 
 data RdfDirection = I18nDatatype | CompoundLiteral
 
-type LoadDocumentCallback = Maybe LoadDocumentOptions -> IRIRef -> IO (RemoteDocument Aeson.Value)
+type LoadDocumentCallback = Maybe LoadDocumentOptions -> URI -> IO (RemoteDocument Aeson.Value)
 
 data LoadDocumentOptions = LoadDocumentOptions
     { loadExtractAllScripts :: Bool
-    , loadProfile :: IRIRef
-    , requestProfile :: Either IRIRef [IRIRef]
+    , loadProfile :: URI
+    , requestProfile :: Either URI [URI]
     }
 
 defaultOptions :: Options
@@ -96,9 +96,9 @@ defaultOptions = Options
 
 data RemoteDocument a = RemoteDocument
     { contentType :: MIME.Type
-    , contextUrl :: IRIRef
+    , contextUrl :: URI
     , document :: a
-    , documentUrl :: IRIRef
+    , documentUrl :: URI
     , profile :: Text
     }
 
