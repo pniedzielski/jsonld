@@ -15,6 +15,7 @@ module Web.JsonLd.Types
 
 import Codec.MIME.Type qualified as MIME
 import Data.Aeson qualified as Aeson
+import Data.List.NonEmpty qualified as NE
 import Data.Text (Text)
 import Data.Vector (Vector)
 import Text.URI (URI(..))
@@ -61,7 +62,7 @@ type LoadDocumentCallback =
 data LoadDocumentOptions = LoadDocumentOptions
     { loadExtractAllScripts :: Bool
     , loadProfile :: URI
-    , requestProfile :: Either URI [URI]
+    , requestProfile :: NE.NonEmpty URI
     }
 
 defaultOptions :: Options
