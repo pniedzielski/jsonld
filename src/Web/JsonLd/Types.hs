@@ -1,3 +1,4 @@
+{-# LANGUAGE StandaloneDeriving #-}
 module Web.JsonLd.Types
     ( Input(..)
     , Record
@@ -83,12 +84,14 @@ defaultOptions = Options
     }
 
 data RemoteDocument a = RemoteDocument
-    { contentType :: MIME.Type
-    , contextUrl :: URI
+    { contentType :: MIME.MIMEType
+    , contextUrl :: Maybe URI
     , document :: a
     , documentUrl :: URI
-    , profile :: Text
+    , profile :: Maybe Text
     }
+
+deriving instance Show a => Show (RemoteDocument a)
 
 defaultContext :: Context
 defaultContext = undefined

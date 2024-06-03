@@ -24,9 +24,11 @@ extra-doc-files:
 dependencies:
   - aeson >= 2 && < 3
   - base >= 4.18 && < 5
+  - lens
   - mime >= 0.4 && < 0.5
   - modern-uri >= 0.3.4.4 && < 0.4
   - rdf4h >= 5.1 && < 6
+  - wreq >= 0.5.2 && < 0.6
   - text >= 2 && < 3
   - vector >= 0.13 && < 1
 
